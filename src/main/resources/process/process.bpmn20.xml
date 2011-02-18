@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:activiti="http://activiti.org/bpmn" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="" id="sid-cd9183b6-8114-4210-ba7e-3534bfb0907d" targetNamespace="http://www.signavio.com/bpmn20" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+   <process name="userTaskPostServiceCallProcess" id="userTaskPostServiceCallProcess" >
+      <startEvent id="startOrder" name=""/>
+  
+      <serviceTask id="INITIATE_ORDER" name="Initiate the order" activiti:expression="${message.go()}" />
+
+	  <userTask id="firstLineSupport" name="First line support" activiti:assignee="kermit">
+		 <documentation>Fix issue raised by customer</documentation>
+	  </userTask>      
+
+      <serviceTask id="PLACE_ORDER" name="Place and persist the order" activiti:expression="${message.go()}" />
+
+      <endEvent id="endOrderEvent" name=""/>
+
+
+      <sequenceFlow id="SequenceFlow" name="" sourceRef="startOrder" targetRef="INITIATE_ORDER"/>
+      <sequenceFlow id="SequenceFlow_1" name="" sourceRef="INITIATE_ORDER" targetRef="firstLineSupport"/>
+      <sequenceFlow id="SequenceFlow_2" name="" sourceRef="firstLineSupport" targetRef="PLACE_ORDER"/>
+      <sequenceFlow id="SequenceFlow_3" name="" sourceRef="PLACE_ORDER" targetRef="endOrderEvent"/>
+   </process>
+</definitions>

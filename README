@@ -1,0 +1,4 @@
+Simple project, showing how to embedd Activiti REST API in your webapp, so that both use same ProcessEngine.
+Note: to use it, you have to:
+- start h2 database, e.g. by running h2.start ant task in Activiti demo
+- configure activiti-explorer, activiti-probe, ... to use REST API URL like: localhost:8080/webappSample/service

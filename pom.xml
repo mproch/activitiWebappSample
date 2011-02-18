@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>webappSample</artifactId>
+
+    <groupId>pl.touk.activiti</groupId>
+    <packaging>war</packaging>
+    <properties>
+        <spring.version>3.0.4.RELEASE</spring.version>
+        <activiti.version>5.3-SNAPSHOT</activiti.version>
+    </properties>
+    <version>1.0.0-SNAPSHOT</version>
+    <build>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+
+                    <execution>
+                        <id>src-dependencies</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.activiti</groupId>
+                                    <artifactId>activiti-webapp-rest</artifactId>
+                                    <version>${activiti.version}</version>
+                                    <type>war</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${basedir}/target/unpacked-dir</outputDirectory>
+                                    <includes>**/*.*</includes>
+                                    <excludes>**/web.xml</excludes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/target/unpacked-dir</directory>
+                        </resource>
+                    </webResources>
+		    <warName>webappSample</warName>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.2.132</version>
+        </dependency>
+    </dependencies>
+
+</project>
