@@ -36,5 +36,7 @@
     </bean>
 
     <bean id="message" class="pl.touk.activiti.web.Message"/>
+  <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>
+
 
 </beans>
